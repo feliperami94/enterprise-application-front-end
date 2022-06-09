@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-interface IAppProps {
+interface IReceiptsProps {
 }
 
-const App: React.FunctionComponent<IAppProps> = (props) => {
+const Receipts: React.FunctionComponent<IReceiptsProps> = (props) => {
   return ;
 };
 
-export default App;
+export default Receipts;

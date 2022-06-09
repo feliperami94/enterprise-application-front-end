@@ -6,6 +6,7 @@ import Restock from './pages/restock/Restock'
 import Inventory from './pages/inventory/Inventory'
 import Bills from './pages/bills/Bills'
 import Receipts from './pages/receipts/Receipts'
+import ProviderList from './component/ProviderList'
 
 import './App.css'
 
@@ -16,7 +17,7 @@ function App() {
     <BrowserRouter>
       <nav className='navbar'>
           {/* <Link to="/">Home</Link> */}
-          <Link to="/providers">Providers</Link>
+          <Link to="/">Providers</Link>
           {/* <Link to="/shopping-cart">Shopping Cart</Link>
           <Link to="/restock">Restock</Link>
           <Link to="/inventory">Inventory</Link>
@@ -26,7 +27,7 @@ function App() {
       </nav>
       <Routes>
             {/* <Route path="/" element={<Home />}/> */}
-            <Route path="/providers" element={<Providers />}/>
+            <Route path="/" element={<ProviderList />}/>
             {/* <Route path="/shopping-cart" element={<ShoppingCart />}/>
             <Route path="/restock" element={<Restock />}/>
             <Route path="/inventory" element={<Inventory />}/>

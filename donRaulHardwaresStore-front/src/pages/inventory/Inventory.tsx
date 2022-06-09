@@ -1,9 +1,10 @@
-import React from 'react'
+import * as React from 'react';
 
-function Inventory() {
-  return (
-    <div>Inventory</div>
-  )
+interface IInventoryProps {
 }
 
-export default Inventory
+const Inventory: React.FunctionComponent<IInventoryProps> = (props) => {
+  return ;
+};
+
+export default Inventory;

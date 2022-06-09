@@ -1,9 +1,10 @@
-import React from 'react'
+import * as React from 'react';
 
-function Restock() {
-  return (
-    <div>Restock</div>
-  )
+interface IRestockProps {
 }
 
-export default Restock
+const Restock: React.FunctionComponent<IRestockProps> = (props) => {
+  return ;
+};
+
+export default Restock;

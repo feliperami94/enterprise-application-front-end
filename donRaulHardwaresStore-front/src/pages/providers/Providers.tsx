@@ -4,7 +4,7 @@ interface IProvidersProps {
 }
 
 const Providers: React.FunctionComponent<IProvidersProps> = (props) => {
-  return ;
+  return <div>Providers</div>;
 };
 
 export default Providers;
