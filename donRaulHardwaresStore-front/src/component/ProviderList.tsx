@@ -19,13 +19,13 @@ const ProviderList: React.FunctionComponent<IProviderListProps> = ({ }) => {
     }
   }, [dispatch])
   return (
-    <table className='w-full text-sm text-center sm:rounded-lg'>
-      <thead className='bg-gray-400'>
+    <table className='w-3/4 mx-auto pl-6 text-sm text-center rounded-lg'>
+      <thead className='bg-amber-500'>
         <tr>
           <th className='p-6 px-50 text-lg' >Name</th>
           <th className='p-6 px-50 text-lg'>Phone</th>
-          <th className='p-6 px-50 text-lg'>Password</th>
-          <th className='p-6 px-50 text-lg'>Availability</th>
+          <th className='p-6 px-50 text-lg'>Passport</th>
+          {/* <th className='p-6 px-50 text-lg'>Availability</th> */}
         </tr>
       </thead>
       <tbody>

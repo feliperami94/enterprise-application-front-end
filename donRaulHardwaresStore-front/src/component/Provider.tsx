@@ -16,7 +16,7 @@ const Provider: React.FunctionComponent<IProviderProps> = ({provider}) => {
       <td className='p-6 '>{provider.providerName}</td>
       <td className='p-6 '>{provider.providerPhone}</td>
       <td className='p-6 '>{provider.providerPassport}</td>
-      <td className='p-6 '><input type='checkbox' checked={provider.availability}></input></td>
+      {/* <td className='p-6 '><input type='checkbox' checked={provider.availability}></input></td> */}
     </tr>
     );
 };

@@ -24,21 +24,33 @@ const FormProviderPost: React.FunctionComponent<IFormProviderPostProps> = (props
         }
     }
 
-  return (<form onSubmit={(e) => handleSubmit(e)}>
-  <label>
-    Provider's Name:
-    <input type='text' value={providerName} onChange={(e) => setProviderName(e.target.value)} />
-  </label>
-  <label>
+  return (<form onSubmit={(e) => handleSubmit(e)} className='w-3/4 mx-auto border-4'>
+    <h1 className='text-lg bg-amber-500 mx-auto py-5 text-center font-bold'>Add New Provider</h1>
+    <div className='p-6 mx-auto'>
+      <label className='text-lg'>
+          Provider's Name:
+          <input className='border-2 border-amber-500 rounded-md' type='text' value={providerName} onChange={(e) => setProviderName(e.target.value)} />
+      </label>
+
+    </div>
+
+    <div className='p-6 mx-auto'>
+  <label className='text-lg'>
     Provider's Phone:
-    <input type='text' value={providerPhone} onChange={(e) => setProviderPhone(e.target.value)} />
+    <input className='border-2 border-amber-500 rounded-md' type='text' value={providerPhone} onChange={(e) => setProviderPhone(e.target.value)} />
   </label>
-  <label>
+
+    </div>
+    <div className='p-6 mx-auto'>
+  <label className='text-lg'>
     Provider's Passporte:
-    <input type='text' value={providerPassport} onChange={(e) => setProviderPassport(e.target.value)} />
+    <input className='border-2 border-amber-500 rounded-md' type='text' value={providerPassport} onChange={(e) => setProviderPassport(e.target.value)} />
   </label>
-  <button type='submit'>submit</button>
-</form>);
+    </div>
+
+  <button type='submit' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Submit</button>
+
+</form>)
 };
 
 export default FormProviderPost
