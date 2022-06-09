@@ -12,9 +12,12 @@ const Provider: React.FunctionComponent<IProviderProps> = ({provider}) => {
     const dispatch = useAppDispatch()
 
   return (
-    <div className='item'>
-      <p>{provider.providerName}</p>
-    </div>
+    <tr>
+      <td className='p-6 '>{provider.providerName}</td>
+      <td className='p-6 '>{provider.providerPhone}</td>
+      <td className='p-6 '>{provider.providerPassport}</td>
+      <td className='p-6 '><input type='checkbox' checked={provider.availability}></input></td>
+    </tr>
     );
 };
 

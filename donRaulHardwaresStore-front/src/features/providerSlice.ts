@@ -6,6 +6,7 @@ export type providerType ={
     providerName: string;
     providerPhone: string;
     providerPassport: string;
+    availability: boolean;
 }
 
 export enum fetchStatus {
@@ -29,7 +30,8 @@ const initialState: IProvidersState = {
 
 enum providerURL {
     getAllProvidersURL = 'http://localhost:8080/v1/api/all-providers',
-    postProviderURL = 'http://localhost:8080/v1/api/postProvider'
+    postProviderURL = 'http://localhost:8080/v1/api/postProvider',
+    putProviderURL = 'http://localhost:8080/v1/api/' 
 } 
 
 export const getAllProviders = createAsyncThunk('getAllProviders', async () => {
@@ -47,6 +49,18 @@ export const getAllProviders = createAsyncThunk('getAllProviders', async () => {
     })
     return (await response.json()) as providerType
   })
+
+  export const putProvider = createAsyncThunk('putProvider', async (provider: providerType) => {
+    const response = await fetch(providerURL.putProviderURL, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify(provider),
+    })
+    return (await response.json()) as providerType
+  })
+
 
 export const providerSlice = createSlice({
     name: 'providers',

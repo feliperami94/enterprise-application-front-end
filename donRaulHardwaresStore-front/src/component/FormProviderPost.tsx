@@ -16,7 +16,7 @@ const FormProviderPost: React.FunctionComponent<IFormProviderPostProps> = (props
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (providerName && providerPhone && providerPassport) {
-          const newProvider: providerType = { providerName, providerPhone, providerPassport}
+          const newProvider: providerType = { providerName, providerPhone, providerPassport, availability: true}
           dispatch(postProvider(newProvider))
           setProviderName('')
           setProviderPhone('')

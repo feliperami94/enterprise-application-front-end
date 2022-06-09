@@ -17,9 +17,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      <nav className='navbar'>
-          <Link to="/">Home</Link>
-          <Link to="/provider">Providers</Link>
+      <nav className='flex sm:justify-left space-x-4 p-5 bg-gray-400'>
+          <Link to="/" className='rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900'>Home</Link>
+          <Link to="/provider" className='rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900'>Providers</Link>
           {/* <Link to="/shopping-cart">Shopping Cart</Link>
           <Link to="/restock">Restock</Link>
           <Link to="/inventory">Inventory</Link>
@@ -29,7 +29,7 @@ function App() {
       </nav>
       <Routes>
             <Route path="/" element={<Home />}/>
-            <Route path="/provider" element={<FormProviderPost />}/>
+            <Route path="/provider" element={<Providers />}/>
             {/* <Route path="/shopping-cart" element={<ShoppingCart />}/>
             <Route path="/restock" element={<Restock />}/>
             <Route path="/inventory" element={<Inventory />}/>
