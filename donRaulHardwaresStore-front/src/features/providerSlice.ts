@@ -2,7 +2,7 @@ import { RootState } from './../app/store';
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 
 export type providerType ={
-    providerId: string;
+    providerId?: string;
     providerName: string;
     providerPhone: string;
     providerPassport: string;
@@ -29,11 +29,23 @@ const initialState: IProvidersState = {
 
 enum providerURL {
     getAllProvidersURL = 'http://localhost:8080/v1/api/all-providers',
+    postProviderURL = 'http://localhost:8080/v1/api/postProvider'
 } 
 
 export const getAllProviders = createAsyncThunk('getAllProviders', async () => {
     const response = await fetch(providerURL.getAllProvidersURL)
     return (await response.json()) as providerType[]
+  })
+
+  export const postProvider = createAsyncThunk('postProvider', async (provider: providerType) => {
+    const response = await fetch(providerURL.postProviderURL, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify(provider),
+    })
+    return (await response.json()) as providerType
   })
 
 export const providerSlice = createSlice({

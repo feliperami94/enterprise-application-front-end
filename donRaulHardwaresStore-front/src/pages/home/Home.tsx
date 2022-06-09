@@ -4,7 +4,7 @@ interface IHomeProps {
 }
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
-  return ;
+  return <p>Home</p>;
 };
 
 export default Home;
