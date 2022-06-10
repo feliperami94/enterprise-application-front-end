@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useAppDispatch } from '../app/store'
 import { postProduct, productType } from '../features/productslice';
+import { useSelector } from 'react-redux'
+import { selectProviderState } from '../features/providerSlice'
 
 
 interface IFormProductPostProps {
@@ -14,6 +16,8 @@ const FormProductPost: React.FunctionComponent<IFormProductPostProps> = (props) 
     const [minQuantity, setMinQuantity] = React.useState(0)
     const [maxQuantity, setMaxQuantity] = React.useState(0)
     const [providerId, setProviderId] = React.useState('')
+    const providerState = useSelector(selectProviderState())
+
     
 
     const dispatch = useAppDispatch()
@@ -56,8 +60,12 @@ const FormProductPost: React.FunctionComponent<IFormProductPostProps> = (props) 
                 <td><input type="number" className='border-2 border-amber-500 rounded-md' value={productPrice} onChange={e=>setProductPrice(Number(e.target.value))}/></td>
                 <td><input type="number" className='border-2 border-amber-500 rounded-md' value={minQuantity} onChange={e=>setMinQuantity(Number(e.target.value))}/></td>
                 <td><input type="number" className='border-2 border-amber-500 rounded-md' value={maxQuantity} onChange={e=>setMaxQuantity(Number(e.target.value))}/></td>
-                <td><input type="string" className='border-2 border-amber-500 rounded-md' value={providerId} onChange={e=>setProviderId(e.target.value)}/></td>
-
+                {/* <td><input type="string" className='border-2 border-amber-500 rounded-md' value={providerId} onChange={e=>setProviderId(e.target.value)}/></td> */}
+                <select name="" id="" className='border-2 border-amber-500 rounded-md'  onChange={e=>setProviderId(e.target.value)}>
+                  {providerState.map((provider) => <option key={provider.providerId} value = {provider.providerId}>
+                    {provider.providerName}
+                  </option>)}
+                </select>
             </tr>
         </tbody>
       </table>
