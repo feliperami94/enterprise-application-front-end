@@ -35,7 +35,6 @@ function App() {
             <Route path="/" element={<Home />}/>
             <Route path="/provider" element={<Providers />}/>
             <Route path="/inventory" element={<Inventory />}></Route>
-
       </Routes>
     </BrowserRouter>
   )

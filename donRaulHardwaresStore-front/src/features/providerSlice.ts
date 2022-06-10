@@ -31,7 +31,7 @@ const initialState: IProvidersState = {
 enum providerURL {
     getAllProvidersURL = 'http://localhost:8080/v1/api/all-providers',
     postProviderURL = 'http://localhost:8080/v1/api/postProvider',
-    putProviderURL = 'http://localhost:8080/v1/api/' 
+    putProviderURL = 'http://localhost:8080/v1/api/putProvider' 
 } 
 
 export const getAllProviders = createAsyncThunk('getAllProviders', async () => {
@@ -90,6 +90,18 @@ export const providerSlice = createSlice({
             state.providers.push(action.payload); 
         })
         builder.addCase(postProvider.rejected, (state) => {
+            state.status = fetchStatus.FAILED
+            state.error = 'Something went wrong while fetching'
+        })
+        //put
+        builder.addCase(putProvider.pending, (state) => {
+            state.status = fetchStatus.PENDING
+        })
+        builder.addCase(putProvider.fulfilled, (state, action) => {
+            state.status = fetchStatus.COMPLETED
+            state.providers[state.providers.indexOf(action.payload)] = action.payload;
+          })
+        builder.addCase(putProvider.rejected, (state) => {
             state.status = fetchStatus.FAILED
             state.error = 'Something went wrong while fetching'
         })

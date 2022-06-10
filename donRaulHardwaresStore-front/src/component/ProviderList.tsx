@@ -25,7 +25,7 @@ const ProviderList: React.FunctionComponent<IProviderListProps> = ({ }) => {
           <th className='p-6 px-50 text-lg' >Name</th>
           <th className='p-6 px-50 text-lg'>Phone</th>
           <th className='p-6 px-50 text-lg'>Passport</th>
-          {/* <th className='p-6 px-50 text-lg'>Availability</th> */}
+          <th className='p-6 px-50 text-lg'>Availability</th>
         </tr>
       </thead>
       <tbody>
