@@ -28,13 +28,15 @@ function App() {
       <nav className='flex sm:justify-left space-x-4 p-5 bg-orange-600'>
           <Link to="/" className='rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900'>Home</Link>
           <Link to="/provider" className='rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900'>Providers</Link>
+          <Link to="/inventory" className='rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900'>Inventory</Link>
       </nav>
     }
-
       <Routes>
             <Route path="/" element={<Home />}/>
             <Route path="/provider" element={<Providers />}/>
-          </Routes>
+            <Route path="/inventory" element={<Inventory />}></Route>
+
+      </Routes>
     </BrowserRouter>
   )
 }
