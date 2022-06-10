@@ -20,7 +20,7 @@ const ProductList: React.FunctionComponent<IProductListProps> = (props) => {
     }
     }, [dispatch])
     return (
-        <table className='w-3/4 mx-auto pl-6 text-sm text-center rounded-lg'>
+        <table className='w-full mx-auto pl-6 text-sm text-center rounded-lg'>
         <thead className='bg-amber-500'>
           <tr>
             <th className='p-6 px-50 text-lg'>Product Name</th>

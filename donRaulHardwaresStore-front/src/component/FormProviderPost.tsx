@@ -31,7 +31,6 @@ const FormProviderPost: React.FunctionComponent<IFormProviderPostProps> = (props
           Provider's Name:
           <input className='border-2 border-amber-500 rounded-md' type='text' value={providerName} onChange={(e) => setProviderName(e.target.value)} />
       </label>
-
     </div>
 
     <div className='p-6 mx-auto'>

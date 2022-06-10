@@ -69,7 +69,7 @@ export const providerSlice = createSlice({
     },
     extraReducers: (builder) => {
         //get
-        builder.addCase(getAllProviders.pending, (state, action) => {
+        builder.addCase(getAllProviders.pending, (state) => {
             state.status = fetchStatus.PENDING
         })
         builder.addCase(getAllProviders.fulfilled, (state, action) => {
@@ -80,6 +80,18 @@ export const providerSlice = createSlice({
             state.status = fetchStatus.FAILED
             state.error = 'Something went wrong while fetching'
             state.providers = []
+        })
+        //post
+        builder.addCase(postProvider.pending, (state) => {
+            state.status = fetchStatus.PENDING
+        })
+        builder.addCase(postProvider.fulfilled, (state, action) => {
+            state.status = fetchStatus.COMPLETED
+            state.providers.push(action.payload); 
+        })
+        builder.addCase(postProvider.rejected, (state) => {
+            state.status = fetchStatus.FAILED
+            state.error = 'Something went wrong while fetching'
         })
 
     }

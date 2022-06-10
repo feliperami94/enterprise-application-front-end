@@ -72,6 +72,18 @@ export const productSlice = createSlice({
             state.error = 'Something went wrong while fetching'
             state.products = []
         })
+          //post
+        builder.addCase(postProduct.pending, (state) => {
+            state.status = fetchStatus.PENDING
+        })
+        builder.addCase(postProduct.fulfilled, (state, action) => {
+            state.status = fetchStatus.COMPLETED
+            state.products.push(action.payload); 
+        })
+        builder.addCase(postProduct.rejected, (state) => {
+            state.status = fetchStatus.FAILED
+            state.error = 'Something went wrong while fetching'
+        })
 
     }
 
