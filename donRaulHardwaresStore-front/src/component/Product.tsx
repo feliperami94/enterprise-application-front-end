@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { productType, putProduct } from '../features/productslice';
+import { productType, putProduct, deleteProduct } from '../features/productslice';
 import { useSelector } from 'react-redux';
 import { selectProviderState } from '../features/providerSlice'; 
 import { useAppDispatch } from '../app/store';
@@ -39,6 +39,10 @@ const Product: React.FunctionComponent<IProductProps> = ({product}) => {
     }
   }
 
+  const deleteProd = async(product: productType) => {
+    dispatch(deleteProduct(product));
+  }
+
 
 
 
@@ -55,6 +59,7 @@ const Product: React.FunctionComponent<IProductProps> = ({product}) => {
       <td className='p-3 '>{product.maxQuantity}</td>
       <td className='p-3 '>{providersName}</td>
       <td className='p-6 '><button className='bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded' onClick={e => setEditState(true)}>Edit</button></td>
+      <td className='p-6 '><button className='bg-red-500 hover:bg-orange-700 text-white font-bold px-2 rounded' onClick={() => deleteProd(product)}>Delete</button></td>
     </tr>
       :
     <tr>
@@ -64,8 +69,14 @@ const Product: React.FunctionComponent<IProductProps> = ({product}) => {
     <td><input type="number" className='border-2 border-amber-500 rounded-md'value={editQuantity} onChange={e=>setEditQuantity(Number(e.target.value))}/></td>
     <td><input type="number" className='border-2 border-amber-500 rounded-md'value={editMin} onChange={e=>setEditMin(Number(e.target.value))}/></td>
     <td><input type="number" className='border-2 border-amber-500 rounded-md'value={editMax} onChange={e=>setEditMax(Number(e.target.value))}/></td>
-    <td><input type="text" className='border-2 border-amber-500 rounded-md'value={editProvider} onChange={e=>setEditProvider(e.target.value)}/></td>
-    <td className='p-6 '><button className='bg-orange-500 hover:bg-green-700 text-white font-bold px-2 rounded' onClick={e => commitProductEdition(product)}>Save</button></td>
+    <td>
+    <select name="" id="" className='border-2 border-amber-500 rounded-md' value={editProvider}  onChange={e=>setEditProvider(e.target.value)}>
+                  {providerState.map((provider) => provider.availability?<option key={provider.providerId} value = {provider.providerId}>
+                    {provider.providerName}
+                  </option>:<></>)}
+                </select>
+    </td>
+    <td className='p-6 '><button className='bg-orange-500 hover:bg-green-700 text-white font-bold px-2 rounded' onClick={() => commitProductEdition(product)}>Save</button></td>
     </tr> 
     }
     </>)

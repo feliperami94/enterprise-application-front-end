@@ -34,7 +34,8 @@ const initialState: IProductState = {
 enum productsURL {
     getAllProductsURL = 'http://localhost:8080/v1/api/allProducts',
     postProductsURL = 'http://localhost:8080/v1/api/postProduct',
-    putProductURL = 'http://localhost:8080/v1/api/putProduct'
+    putProductURL = 'http://localhost:8080/v1/api/putProduct',
+    deleteProductBaseURL = 'http://localhost:8080/v1/api/deleteProduct'
 } 
 
 export const getAllProducts = createAsyncThunk('getAllProducts', async () => {
@@ -62,6 +63,13 @@ export const getAllProducts = createAsyncThunk('getAllProducts', async () => {
       body: JSON.stringify(product),
     })
     return (await response.json()) as productType
+  })
+
+  export const deleteProduct = createAsyncThunk('deleteProduct', async (product: productType) => {
+    const response = await fetch(`${productsURL.deleteProductBaseURL}/${product.productId}`, {
+      method: 'DELETE',
+    })
+    return { deleted: response.ok, productId: product.productId }
   })
 
 
@@ -109,6 +117,20 @@ export const productSlice = createSlice({
         builder.addCase(putProduct.rejected, (state) => {
             state.status = fetchStatus.FAILED
             state.error = 'Something went wrong while fetching'
+        })
+        // delete
+        builder.addCase(deleteProduct.pending, (state) => {
+            state.status = fetchStatus.PENDING
+        })
+        builder.addCase(deleteProduct.fulfilled, (state, action) => {
+            state.status = fetchStatus.COMPLETED
+            if (action.payload.deleted) {
+              state.products = state.products.filter((product) => product.productId !== action.payload.productId)
+            }
+        })
+        builder.addCase(deleteProduct.rejected, (state) => {
+            state.status = fetchStatus.FAILED
+            state.error = 'Something went wrong while deleting the post'
         })
 
     }

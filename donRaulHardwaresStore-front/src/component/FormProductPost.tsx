@@ -49,7 +49,7 @@ const FormProductPost: React.FunctionComponent<IFormProductPostProps> = (props) 
             <th className='p-6 px-50 text-lg'>Quantity</th>
             <th className='p-6 px-50 text-lg'>Min Quantity</th>
             <th className='p-6 px-50 text-lg'>Max Quantity</th>
-            <th className='p-6 px-50 text-lg'>Provider ID</th>
+            <th className='p-6 px-50 text-lg'>Provider</th>
           </tr>
         </thead>
         <tbody>
@@ -62,9 +62,10 @@ const FormProductPost: React.FunctionComponent<IFormProductPostProps> = (props) 
                 <td><input type="number" className='border-2 border-amber-500 rounded-md' value={maxQuantity} onChange={e=>setMaxQuantity(Number(e.target.value))}/></td>
                 {/* <td><input type="string" className='border-2 border-amber-500 rounded-md' value={providerId} onChange={e=>setProviderId(e.target.value)}/></td> */}
                 <select name="" id="" className='border-2 border-amber-500 rounded-md'  onChange={e=>setProviderId(e.target.value)}>
-                  {providerState.map((provider) => <option key={provider.providerId} value = {provider.providerId}>
+                  {<option disabled selected>Choose Provider</option>}
+                  {providerState.map((provider) => provider.availability?<option key={provider.providerId} value = {provider.providerId}>
                     {provider.providerName}
-                  </option>)}
+                  </option>:<></>)}
                 </select>
             </tr>
         </tbody>
