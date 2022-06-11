@@ -99,7 +99,9 @@ export const providerSlice = createSlice({
         })
         builder.addCase(putProvider.fulfilled, (state, action) => {
             state.status = fetchStatus.COMPLETED
-            state.providers[state.providers.indexOf(action.payload)] = action.payload;
+            let providerFocus = state.providers.filter(provider=>provider.providerId === action.payload.providerId)[0];
+            let providerFocusPosition = state.providers.indexOf(providerFocus);
+            state.providers[providerFocusPosition] = action.payload;
           })
         builder.addCase(putProvider.rejected, (state) => {
             state.status = fetchStatus.FAILED

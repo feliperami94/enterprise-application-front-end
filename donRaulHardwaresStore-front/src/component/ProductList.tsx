@@ -8,7 +8,7 @@ interface IProductListProps {
 }
 
 const ProductList: React.FunctionComponent<IProductListProps> = (props) => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
 
     const error = useSelector(selectProductFetchError())
     const status = useSelector(selectProductStatus())
@@ -29,6 +29,9 @@ const ProductList: React.FunctionComponent<IProductListProps> = (props) => {
             <th className='p-6 px-50 text-lg'>Quantity</th>
             <th className='p-6 px-50 text-lg'>Min Quantity</th>
             <th className='p-6 px-50 text-lg'>Max Quantity</th>
+            <th className='p-6 px-50 text-lg'>Provider</th>
+            <th className='p-6 px-50 text-lg'>Edit</th>
+
           </tr>
         </thead>
         <tbody>

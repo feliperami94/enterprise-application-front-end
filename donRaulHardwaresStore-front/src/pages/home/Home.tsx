@@ -5,6 +5,7 @@ interface IHomeProps {
 }
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
+
   
   return(
     <div className='flex justify-center mx-auto my-10'>

@@ -34,6 +34,7 @@ const initialState: IProductState = {
 enum productsURL {
     getAllProductsURL = 'http://localhost:8080/v1/api/allProducts',
     postProductsURL = 'http://localhost:8080/v1/api/postProduct',
+    putProductURL = 'http://localhost:8080/v1/api/putProduct'
 } 
 
 export const getAllProducts = createAsyncThunk('getAllProducts', async () => {
@@ -44,6 +45,17 @@ export const getAllProducts = createAsyncThunk('getAllProducts', async () => {
   export const postProduct = createAsyncThunk('postProduct', async (product: productType) => {
     const response = await fetch(productsURL.postProductsURL, {
       method: 'POST',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify(product),
+    })
+    return (await response.json()) as productType
+  })
+
+  export const putProduct = createAsyncThunk('putProduct', async (product: productType) => {
+    const response = await fetch(productsURL.putProductURL, {
+      method: 'PUT',
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
@@ -81,6 +93,20 @@ export const productSlice = createSlice({
             state.products.push(action.payload); 
         })
         builder.addCase(postProduct.rejected, (state) => {
+            state.status = fetchStatus.FAILED
+            state.error = 'Something went wrong while fetching'
+        })
+        //put
+        builder.addCase(putProduct.pending, (state) => {
+            state.status = fetchStatus.PENDING
+        })
+        builder.addCase(putProduct.fulfilled, (state, action) => {
+            state.status = fetchStatus.COMPLETED
+            let productFocus = state.products.filter(product=>product.productId === action.payload.productId)[0];
+            let productFocusPosition = state.products.indexOf(productFocus);
+            state.products[productFocusPosition] = action.payload;
+            })
+        builder.addCase(putProduct.rejected, (state) => {
             state.status = fetchStatus.FAILED
             state.error = 'Something went wrong while fetching'
         })

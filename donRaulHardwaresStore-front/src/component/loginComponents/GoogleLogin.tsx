@@ -37,7 +37,7 @@ const GoogleLogin: React.FunctionComponent<IGoogleLoginProps> = (props) => {
     
           dispatch(logInInReducer(user))
           
-          navigate('/welcome')
+          navigate('/provider')
     
           // ...
         }).catch((error) => {
