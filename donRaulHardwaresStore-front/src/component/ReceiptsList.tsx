@@ -1,9 +1,26 @@
 import * as React from 'react';
+import {useSelector, } from 'react-redux';
+import { useAppDispatch } from '../app/store';
+import { selectReceiptFetchError,  selectReceiptStatus, selectReceiptState, fetchStatus, getAllReceipts} from '../features/receiptSlice';
+import Receipt from './Receipt';
 
 interface IReceiptsListProps {
 }
 
-const ReceiptsList: React.FunctionComponent<IReceiptsListProps> = (props) => {
+const ReceiptsList: React.FunctionComponent<IReceiptsListProps> = ({}) => {
+    const dispatch = useAppDispatch()
+
+    const error = useSelector(selectReceiptFetchError())
+    const status = useSelector(selectReceiptStatus())
+    const receiptState = useSelector(selectReceiptState())
+
+
+
+    React.useEffect(() => {
+        if (status === fetchStatus.IDLE) {
+          dispatch(getAllReceipts())
+        }
+      }, [dispatch])
   return (
     <table className='w-3/4 mx-auto pl-6 text-sm text-center rounded-lg'>
       <thead className='bg-amber-500'>
@@ -17,7 +34,7 @@ const ReceiptsList: React.FunctionComponent<IReceiptsListProps> = (props) => {
         </tr>
       </thead>
       <tbody>
-        {/* {!error && providerState.map((provider) => <Provider key={provider.providerId} provider={provider} />)} */}
+        {!error && receiptState.map((receipt) => <Receipt key={receipt.receiptId} receipt={receipt} />)}
       </tbody>
     </table>);
 };

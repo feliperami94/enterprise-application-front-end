@@ -3,10 +3,10 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 
 export type receiptType ={
     receiptId?: string;
-    providerName: string;
-    providerPhone: string;
-    providerPassport: string;
-    availability: boolean;
+    productQuantity: number;
+    receiptProductId: string;
+    receiptDate: string;
+    providerId: string;
 }
 
 export enum fetchStatus {
@@ -16,105 +16,78 @@ export enum fetchStatus {
     PENDING = 'pending',
   }
 
-interface IProvidersState {
-    providers: providerType[],
+interface IReceiptState {
+    receipts: receiptType[],
     status: fetchStatus,
     error: null | string,
 }
 
-const initialState: IProvidersState = {
-    providers: [],
+const initialState: IReceiptState = {
+    receipts: [],
     status: fetchStatus.IDLE,
     error: null
 }
 
-enum providerURL {
-    getAllProvidersURL = 'http://localhost:8080/v1/api/all-providers',
-    postProviderURL = 'http://localhost:8080/v1/api/postProvider',
-    putProviderURL = 'http://localhost:8080/v1/api/putProvider' 
+enum receiptURL {
+    getAllReceiptsURL = 'http://localhost:8080/v1/api/allReceipts',
+    postReceiptURL = 'http://localhost:8080/v1/api/postReceipt',
 } 
 
-export const getAllProviders = createAsyncThunk('getAllProviders', async () => {
-    const response = await fetch(providerURL.getAllProvidersURL)
-    return (await response.json()) as providerType[]
+export const getAllReceipts = createAsyncThunk('getAllReceipts', async () => {
+    const response = await fetch(receiptURL.getAllReceiptsURL)
+    return (await response.json()) as receiptType[]
   })
 
-  export const postProvider = createAsyncThunk('postProvider', async (provider: providerType) => {
-    const response = await fetch(providerURL.postProviderURL, {
+  export const postReceipt = createAsyncThunk('postReceipt', async (receipt: receiptType) => {
+    const response = await fetch(receiptURL.postReceiptURL, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
-      body: JSON.stringify(provider),
+      body: JSON.stringify(receipt),
     })
-    return (await response.json()) as providerType
+    return (await response.json()) as receiptType
   })
 
-  export const putProvider = createAsyncThunk('putProvider', async (provider: providerType) => {
-    const response = await fetch(providerURL.putProviderURL, {
-      method: 'PUT',
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-      body: JSON.stringify(provider),
-    })
-    return (await response.json()) as providerType
-  })
-  
 
-
-export const providerSlice = createSlice({
-    name: 'providers',
+export const receiptSlice = createSlice({
+    name: 'receipts',
     initialState,
     reducers:{
     },
     extraReducers: (builder) => {
         //get
-        builder.addCase(getAllProviders.pending, (state) => {
+        builder.addCase(getAllReceipts.pending, (state) => {
             state.status = fetchStatus.PENDING
         })
-        builder.addCase(getAllProviders.fulfilled, (state, action) => {
+        builder.addCase(getAllReceipts.fulfilled, (state, action) => {
             state.status = fetchStatus.COMPLETED
-            state.providers = action.payload
+            state.receipts = action.payload
         })
-        builder.addCase(getAllProviders.rejected, (state, action) => {
+        builder.addCase(getAllReceipts.rejected, (state, action) => {
             state.status = fetchStatus.FAILED
             state.error = 'Something went wrong while fetching'
-            state.providers = []
+            state.receipts = []
         })
         //post
-        builder.addCase(postProvider.pending, (state) => {
+        builder.addCase(postReceipt.pending, (state) => {
             state.status = fetchStatus.PENDING
         })
-        builder.addCase(postProvider.fulfilled, (state, action) => {
+        builder.addCase(postReceipt.fulfilled, (state, action) => {
             state.status = fetchStatus.COMPLETED
-            state.providers.push(action.payload); 
+            state.receipts.push(action.payload); 
         })
-        builder.addCase(postProvider.rejected, (state) => {
+        builder.addCase(postReceipt.rejected, (state) => {
             state.status = fetchStatus.FAILED
             state.error = 'Something went wrong while fetching'
         })
-        //put
-        builder.addCase(putProvider.pending, (state) => {
-            state.status = fetchStatus.PENDING
-        })
-        builder.addCase(putProvider.fulfilled, (state, action) => {
-            state.status = fetchStatus.COMPLETED
-            let providerFocus = state.providers.filter(provider=>provider.providerId === action.payload.providerId)[0];
-            let providerFocusPosition = state.providers.indexOf(providerFocus);
-            state.providers[providerFocusPosition] = action.payload;
-          })
-        builder.addCase(putProvider.rejected, (state) => {
-            state.status = fetchStatus.FAILED
-            state.error = 'Something went wrong while fetching'
-        })
+
 
     }
 
 })
 
 
-// export default providerSlice.reducer;
-export const selectProviderState = () => (state: RootState) => state.providers.providers
-export const selectProviderStatus = () => (state: RootState) => state.providers.status
-export const selectProviderFetchError = () => (state: RootState) => state.providers.error
+export const selectReceiptState = () => (state: RootState) => state.receipts.receipts
+export const selectReceiptStatus = () => (state: RootState) => state.receipts.status
+export const selectReceiptFetchError = () => (state: RootState) => state.receipts.error

@@ -20,7 +20,7 @@ const FormProductPost: React.FunctionComponent<IFormProductPostProps> = (props) 
 
     
 
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
