@@ -12,7 +12,7 @@ export type productType ={
     providerId: string;
 }
 
-export enum fetchStatus {
+export enum productFetchStatus {
     IDLE = 'idle',
     COMPLETED = 'completed',
     FAILED = 'failed',
@@ -21,13 +21,13 @@ export enum fetchStatus {
 
 interface IProductState {
     products: productType[],
-    status: fetchStatus,
+    status: productFetchStatus,
     error: null | string,
 }
 
 const initialState: IProductState = {
     products: [],
-    status: fetchStatus.IDLE,
+    status: productFetchStatus.IDLE,
     error: null
 }
 
@@ -81,55 +81,55 @@ export const productSlice = createSlice({
     extraReducers: (builder) => {
         //get
         builder.addCase(getAllProducts.pending, (state, action) => {
-            state.status = fetchStatus.PENDING
+            state.status = productFetchStatus.PENDING
         })
         builder.addCase(getAllProducts.fulfilled, (state, action) => {
-            state.status = fetchStatus.COMPLETED
+            state.status = productFetchStatus.COMPLETED
             state.products = action.payload
         })
         builder.addCase(getAllProducts.rejected, (state, action) => {
-            state.status = fetchStatus.FAILED
+            state.status = productFetchStatus.FAILED
             state.error = 'Something went wrong while fetching'
             state.products = []
         })
           //post
         builder.addCase(postProduct.pending, (state) => {
-            state.status = fetchStatus.PENDING
+            state.status = productFetchStatus.PENDING
         })
         builder.addCase(postProduct.fulfilled, (state, action) => {
-            state.status = fetchStatus.COMPLETED
+            state.status = productFetchStatus.COMPLETED
             state.products.push(action.payload); 
         })
         builder.addCase(postProduct.rejected, (state) => {
-            state.status = fetchStatus.FAILED
+            state.status = productFetchStatus.FAILED
             state.error = 'Something went wrong while fetching'
         })
         //put
         builder.addCase(putProduct.pending, (state) => {
-            state.status = fetchStatus.PENDING
+            state.status = productFetchStatus.PENDING
         })
         builder.addCase(putProduct.fulfilled, (state, action) => {
-            state.status = fetchStatus.COMPLETED
+            state.status = productFetchStatus.COMPLETED
             let productFocus = state.products.filter(product=>product.productId === action.payload.productId)[0];
             let productFocusPosition = state.products.indexOf(productFocus);
             state.products[productFocusPosition] = action.payload;
             })
         builder.addCase(putProduct.rejected, (state) => {
-            state.status = fetchStatus.FAILED
+            state.status = productFetchStatus.FAILED
             state.error = 'Something went wrong while fetching'
         })
         // delete
         builder.addCase(deleteProduct.pending, (state) => {
-            state.status = fetchStatus.PENDING
+            state.status = productFetchStatus.PENDING
         })
         builder.addCase(deleteProduct.fulfilled, (state, action) => {
-            state.status = fetchStatus.COMPLETED
+            state.status = productFetchStatus.COMPLETED
             if (action.payload.deleted) {
               state.products = state.products.filter((product) => product.productId !== action.payload.productId)
             }
         })
         builder.addCase(deleteProduct.rejected, (state) => {
-            state.status = fetchStatus.FAILED
+            state.status = productFetchStatus.FAILED
             state.error = 'Something went wrong while deleting the post'
         })
 

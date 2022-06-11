@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useAppDispatch } from '../app/store'
 import { useSelector } from 'react-redux'
-import { selectProviderState, selectProviderStatus, selectProviderFetchError, getAllProviders, fetchStatus } from '../features/providerSlice'
+import { selectProviderState, selectProviderStatus, selectProviderFetchError, getAllProviders, providerFetchStatus } from '../features/providerSlice'
 import Provider from './Provider'
 
 interface IProviderListProps { }
@@ -14,7 +14,7 @@ const ProviderList: React.FunctionComponent<IProviderListProps> = ({ }) => {
   const providerState = useSelector(selectProviderState())
 
   React.useEffect(() => {
-    if (status === fetchStatus.IDLE) {
+    if (status === providerFetchStatus.IDLE) {
       dispatch(getAllProviders())
     }
   }, [dispatch])

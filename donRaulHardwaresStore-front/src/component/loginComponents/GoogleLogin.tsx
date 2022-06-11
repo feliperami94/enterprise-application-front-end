@@ -34,8 +34,9 @@ const GoogleLogin: React.FunctionComponent<IGoogleLoginProps> = (props) => {
     
           /*Whit the information of the user you can populate an state that is mainly focused on 
             holding the information of the user that is logged in*/
+            console.log(user);
     
-          dispatch(logInInReducer(user))
+          dispatch(logInInReducer(user.displayName))
           
           navigate('/provider')
     

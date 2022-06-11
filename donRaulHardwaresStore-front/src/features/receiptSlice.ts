@@ -9,7 +9,7 @@ export type receiptType ={
     providerId: string;
 }
 
-export enum fetchStatus {
+export enum receiptFetchStatus {
     IDLE = 'idle',
     COMPLETED = 'completed',
     FAILED = 'failed',
@@ -18,13 +18,13 @@ export enum fetchStatus {
 
 interface IReceiptState {
     receipts: receiptType[],
-    status: fetchStatus,
+    status: receiptFetchStatus,
     error: null | string,
 }
 
 const initialState: IReceiptState = {
     receipts: [],
-    status: fetchStatus.IDLE,
+    status: receiptFetchStatus.IDLE,
     error: null
 }
 
@@ -58,27 +58,27 @@ export const receiptSlice = createSlice({
     extraReducers: (builder) => {
         //get
         builder.addCase(getAllReceipts.pending, (state) => {
-            state.status = fetchStatus.PENDING
+            state.status = receiptFetchStatus.PENDING
         })
         builder.addCase(getAllReceipts.fulfilled, (state, action) => {
-            state.status = fetchStatus.COMPLETED
+            state.status = receiptFetchStatus.COMPLETED
             state.receipts = action.payload
         })
         builder.addCase(getAllReceipts.rejected, (state, action) => {
-            state.status = fetchStatus.FAILED
+            state.status = receiptFetchStatus.FAILED
             state.error = 'Something went wrong while fetching'
             state.receipts = []
         })
         //post
         builder.addCase(postReceipt.pending, (state) => {
-            state.status = fetchStatus.PENDING
+            state.status = receiptFetchStatus.PENDING
         })
         builder.addCase(postReceipt.fulfilled, (state, action) => {
-            state.status = fetchStatus.COMPLETED
+            state.status = receiptFetchStatus.COMPLETED
             state.receipts.push(action.payload); 
         })
         builder.addCase(postReceipt.rejected, (state) => {
-            state.status = fetchStatus.FAILED
+            state.status = receiptFetchStatus.FAILED
             state.error = 'Something went wrong while fetching'
         })
 

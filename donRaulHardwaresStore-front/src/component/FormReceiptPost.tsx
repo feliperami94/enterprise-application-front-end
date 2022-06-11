@@ -34,10 +34,10 @@ const FormReceiptPost: React.FunctionComponent<IFormReceiptPostProps> = (props) 
     
   }
 
-  return (<form onSubmit={(e) => generateReceipt(e)} className='w-1/2 mx-auto border-4'>
+  return (<form onSubmit={(e) => generateReceipt(e)} className='w-1/2 mx-auto border-4 my-6 rounded-lg'>
   <div className='bg-orange-600 py-6'><h1 className='text-lg text-center font-bold'>Create Receipt</h1></div>
   <table className='w-full mx-auto pl-6 text-sm text-center rounded-lg'>
-      <thead className='bg-amber-500'>
+      <thead className='bg-amber-500 '>
         <tr>
             <th className='p-6 px-50 text-lg'>Product Name</th>
             <th className='p-6 px-50 text-lg'>Quantity</th>
@@ -61,7 +61,9 @@ const FormReceiptPost: React.FunctionComponent<IFormReceiptPostProps> = (props) 
         </tr>
       </tbody>
     </table>
-<button type='submit' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' >Generate Receipt</button>
+    <div className='flex justify-center'>
+<button type='submit' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4' >Generate Receipt</button>
+    </div>
 
 </form>);
 };

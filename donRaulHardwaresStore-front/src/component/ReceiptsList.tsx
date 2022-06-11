@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useSelector, } from 'react-redux';
 import { useAppDispatch } from '../app/store';
-import { selectReceiptFetchError,  selectReceiptStatus, selectReceiptState, fetchStatus, getAllReceipts} from '../features/receiptSlice';
+import { selectReceiptFetchError,  selectReceiptStatus, selectReceiptState, receiptFetchStatus, getAllReceipts} from '../features/receiptSlice';
 import Receipt from './Receipt';
 
 interface IReceiptsListProps {
@@ -17,7 +17,7 @@ const ReceiptsList: React.FunctionComponent<IReceiptsListProps> = ({}) => {
 
 
     React.useEffect(() => {
-        if (status === fetchStatus.IDLE) {
+        if (status === receiptFetchStatus.IDLE) {
           dispatch(getAllReceipts())
         }
       }, [dispatch])

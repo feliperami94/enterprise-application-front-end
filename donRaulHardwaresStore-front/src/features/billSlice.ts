@@ -10,7 +10,7 @@ export type billType ={
     totalPaid: number
 }
 
-export enum fetchStatus {
+export enum billFetchStatus {
     IDLE = 'idle',
     COMPLETED = 'completed',
     FAILED = 'failed',
@@ -19,13 +19,13 @@ export enum fetchStatus {
 
 interface IBillState {
     bills: billType[],
-    status: fetchStatus,
+    status: billFetchStatus,
     error: null | string,
 }
 
 const initialState: IBillState = {
     bills: [],
-    status: fetchStatus.IDLE,
+    status: billFetchStatus.IDLE,
     error: null
 }
 
@@ -59,27 +59,27 @@ export const billSlice = createSlice({
     extraReducers: (builder) => {
         //get
         builder.addCase(getAllBills.pending, (state) => {
-            state.status = fetchStatus.PENDING
+            state.status = billFetchStatus.PENDING
         })
         builder.addCase(getAllBills.fulfilled, (state, action) => {
-            state.status = fetchStatus.COMPLETED
+            state.status = billFetchStatus.COMPLETED
             state.bills = action.payload
         })
         builder.addCase(getAllBills.rejected, (state, action) => {
-            state.status = fetchStatus.FAILED
+            state.status = billFetchStatus.FAILED
             state.error = 'Something went wrong while fetching'
             state.bills = []
         })
         //post
         builder.addCase(postBill.pending, (state) => {
-            state.status = fetchStatus.PENDING
+            state.status = billFetchStatus.PENDING
         })
         builder.addCase(postBill.fulfilled, (state, action) => {
-            state.status = fetchStatus.COMPLETED
+            state.status = billFetchStatus.COMPLETED
             state.bills.push(action.payload); 
         })
         builder.addCase(postBill.rejected, (state) => {
-            state.status = fetchStatus.FAILED
+            state.status = billFetchStatus.FAILED
             state.error = 'Something went wrong while fetching'
         })
 

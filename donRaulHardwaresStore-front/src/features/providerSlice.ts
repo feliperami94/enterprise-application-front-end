@@ -9,7 +9,7 @@ export type providerType ={
     availability: boolean;
 }
 
-export enum fetchStatus {
+export enum providerFetchStatus {
     IDLE = 'idle',
     COMPLETED = 'completed',
     FAILED = 'failed',
@@ -18,13 +18,13 @@ export enum fetchStatus {
 
 interface IProvidersState {
     providers: providerType[],
-    status: fetchStatus,
+    status: providerFetchStatus,
     error: null | string,
 }
 
 const initialState: IProvidersState = {
     providers: [],
-    status: fetchStatus.IDLE,
+    status: providerFetchStatus.IDLE,
     error: null
 }
 
@@ -71,41 +71,41 @@ export const providerSlice = createSlice({
     extraReducers: (builder) => {
         //get
         builder.addCase(getAllProviders.pending, (state) => {
-            state.status = fetchStatus.PENDING
+            state.status = providerFetchStatus.PENDING
         })
         builder.addCase(getAllProviders.fulfilled, (state, action) => {
-            state.status = fetchStatus.COMPLETED
+            state.status = providerFetchStatus.COMPLETED
             state.providers = action.payload
         })
         builder.addCase(getAllProviders.rejected, (state, action) => {
-            state.status = fetchStatus.FAILED
+            state.status = providerFetchStatus.FAILED
             state.error = 'Something went wrong while fetching'
             state.providers = []
         })
         //post
         builder.addCase(postProvider.pending, (state) => {
-            state.status = fetchStatus.PENDING
+            state.status = providerFetchStatus.PENDING
         })
         builder.addCase(postProvider.fulfilled, (state, action) => {
-            state.status = fetchStatus.COMPLETED
+            state.status = providerFetchStatus.COMPLETED
             state.providers.push(action.payload); 
         })
         builder.addCase(postProvider.rejected, (state) => {
-            state.status = fetchStatus.FAILED
+            state.status = providerFetchStatus.FAILED
             state.error = 'Something went wrong while fetching'
         })
         //put
         builder.addCase(putProvider.pending, (state) => {
-            state.status = fetchStatus.PENDING
+            state.status = providerFetchStatus.PENDING
         })
         builder.addCase(putProvider.fulfilled, (state, action) => {
-            state.status = fetchStatus.COMPLETED
+            state.status = providerFetchStatus.COMPLETED
             let providerFocus = state.providers.filter(provider=>provider.providerId === action.payload.providerId)[0];
             let providerFocusPosition = state.providers.indexOf(providerFocus);
             state.providers[providerFocusPosition] = action.payload;
           })
         builder.addCase(putProvider.rejected, (state) => {
-            state.status = fetchStatus.FAILED
+            state.status = providerFetchStatus.FAILED
             state.error = 'Something went wrong while fetching'
         })
 

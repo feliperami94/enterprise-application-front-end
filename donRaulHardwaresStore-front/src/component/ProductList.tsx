@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useAppDispatch } from '../app/store'
 import { useSelector } from 'react-redux'
-import {getAllProducts, selectProductFetchError, selectProductState, selectProductStatus, fetchStatus} from '../features/productslice'
+import {getAllProducts, selectProductFetchError, selectProductState, selectProductStatus, productFetchStatus} from '../features/productslice'
 import Product from "./Product"
 
 interface IProductListProps {
@@ -15,7 +15,7 @@ const ProductList: React.FunctionComponent<IProductListProps> = (props) => {
   const dispatch = useAppDispatch();
 
     React.useEffect(() => {
-        if (status === fetchStatus.IDLE) {
+        if (status === productFetchStatus.IDLE) {
         dispatch(getAllProducts())
     }
     }, [dispatch])
