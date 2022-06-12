@@ -14,7 +14,7 @@ export const store = configureStore({
         logged: loggedInReducer,
         products: productSlice.reducer,
         receipts: receiptSlice.reducer,
-        bills: billSlice.reducer
+        bills: billSlice.reducer,
     },
 })
 

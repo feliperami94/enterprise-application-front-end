@@ -12,6 +12,12 @@ export type productType ={
     providerId: string;
 }
 
+export type billProducts = {
+    productName: string,
+    quantity: number,
+    price: number
+}
+
 export enum productFetchStatus {
     IDLE = 'idle',
     COMPLETED = 'completed',
@@ -21,12 +27,14 @@ export enum productFetchStatus {
 
 interface IProductState {
     products: productType[],
+    billProducts: billProducts[],
     status: productFetchStatus,
     error: null | string,
 }
 
 const initialState: IProductState = {
     products: [],
+    billProducts: [],
     status: productFetchStatus.IDLE,
     error: null
 }
@@ -77,6 +85,17 @@ export const productSlice = createSlice({
     name: 'products',
     initialState,
     reducers:{
+      productToBill: (state: IProductState, action: PayloadAction<billProducts>) => {
+
+        const isPresent = state.billProducts.find(billProduct=>billProduct.productName === action.payload.productName)
+
+        if(isPresent) {
+          state.billProducts = state.billProducts.map(billProduct=> billProduct.productName === action.payload.productName?action.payload:billProduct)
+        } else{
+          state.billProducts.push(action.payload);
+        }
+      },
+
     },
     extraReducers: (builder) => {
         //get
@@ -142,3 +161,5 @@ export const productSlice = createSlice({
 export const selectProductState = () => (state: RootState) => state.products.products
 export const selectProductStatus = () => (state: RootState) => state.products.status
 export const selectProductFetchError = () => (state: RootState) => state.products.error
+export const selectBillProducts = () => (state: RootState) => state.products.billProducts
+export const {productToBill} = productSlice.actions;

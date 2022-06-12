@@ -18,7 +18,6 @@ const Bill: React.FunctionComponent<IBillProps> = ({bill}) => {
         <li>Bill Date: {bill.billDate}</li>
         <li>Client Name: {bill.clientName}</li>
         <li>Seller Name: {bill.sellerName} </li>
-
       </ul>
     </div>
   );

@@ -55,7 +55,7 @@ const FormReceiptPost: React.FunctionComponent<IFormReceiptPostProps> = (props) 
           </td>
         
           <td>
-            <input type="text" name="" id="" className='border-2 border-amber-500 rounded-md' value={quantity} onChange={e=>setQuantity(Number(e.target.value))}/>
+            <input type="text" name="" id="" className='my-6 border-2 border-amber-500 rounded-md' value={quantity} onChange={e=>setQuantity(Number(e.target.value))}/>
           </td>
 
         </tr>

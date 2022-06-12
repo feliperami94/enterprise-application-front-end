@@ -18,7 +18,7 @@ const Receipt: React.FunctionComponent<IReceiptProps> = ({receipt}) => {
 
   return (
     <tr>
-      <td><p>{receipt.receiptDate}</p></td>
+      <td><p className='py-6'>{receipt.receiptDate}</p></td>
       <td><p>{receipt.providerId}</p></td>
       <td><p>{providerState.filter(provider => provider.providerId === receipt.providerId)[0].providerName}</p></td>
       <td><p>{receipt.receiptProductId}</p></td>
