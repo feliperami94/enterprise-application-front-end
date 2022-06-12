@@ -12,7 +12,7 @@ const BillList: React.FunctionComponent<IBillListProps> = () => {
     const billState = useSelector(selectBillState());
 
   return (
-    <div className='flex sm:w-1/4 justify-center rounded-lg border-2 m-6'>
+    <div className='mx-auto flex-col sm:w-full rounded-lg m-6'>
         {billState.map(bill=><Bill key={bill.billId} bill={bill}/>)}
     </div>
   );

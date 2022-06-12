@@ -28,7 +28,7 @@ const ProductItemBill: React.FunctionComponent<IProductItemBillProps> = ({produc
             {product.productName}
         </td>
         <td>
-            <input type="number" defaultValue='0' className='border-2 border-amber-500 rounded-md' onChange={e=> updateQuantityHandler(e)} min='0'/>
+            <input type="number" defaultValue='0' className='border-2 border-amber-500 rounded-md' onChange={e=> updateQuantityHandler(e)} min='0' max={product.productQuantity}/>
         </td>
         <td>
             {product.productQuantity}

@@ -12,7 +12,7 @@ interface IBillsProps {
 const Bills: React.FunctionComponent<IBillsProps> = (props) => {
 
   return (
-    <div>
+    <div className='flex'>
       <BillList/>
     </div>
   );

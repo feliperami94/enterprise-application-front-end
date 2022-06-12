@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {useSelector } from 'react-redux';
-import {selectProductState, selectBillProducts} from '../../features/productslice';
+import {selectProductState, selectBillProducts, productType, putProduct} from '../../features/productslice';
 import {useAppDispatch} from '../../app/store';
 import ProductItemBill from './ProductItemBill';
 import {useState} from 'react'
 import { billType, postBill } from '../../features/billSlice';
 import * as moment from 'moment'
+import { useNavigate } from 'react-router-dom'
 
 
 interface IFormPostBillsProps {
@@ -17,6 +18,7 @@ const FormPostBills: React.FunctionComponent<IFormPostBillsProps> = (props) => {
     const [clientName, setClientName] = useState('');
     const [sellerName, setSellerName] = useState('');
     const billProducts = useSelector(selectBillProducts())
+    const navigate = useNavigate();
 
 
 
@@ -35,9 +37,26 @@ const FormPostBills: React.FunctionComponent<IFormPostBillsProps> = (props) => {
 
         const actualDate = moment().format("DD-MM-YYYY");
 
+
         if(clientName && sellerName && productList && totalPaid){
         const newBill:billType = {billDate: actualDate, clientName, sellerName, productList, totalPaid}
           dispatch(postBill(newBill))
+
+        for(let billProduct of billProducts){
+          let productToUpdate = productState.find(product => product.productName === billProduct.productName) as productType;
+          let productUpdated: productType = {
+          productId: productToUpdate.productId,
+          productName: productToUpdate.productName,
+          description: productToUpdate.description,
+          productQuantity: productToUpdate.productQuantity - billProduct.quantity,
+          productPrice: productToUpdate.productPrice,
+          minQuantity: productToUpdate.minQuantity,
+          maxQuantity: productToUpdate.maxQuantity,
+          providerId: productToUpdate.providerId} 
+          dispatch(putProduct(productUpdated))
+        }
+        navigate('/bills')
+
         }
     }
   return (
