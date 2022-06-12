@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 import Providers from './pages/providers/Providers'
-import ShoppingCart from './pages/shoppingCart/ShoppingCart'
-import Restock from './pages/restock/Restock'
 import Inventory from './pages/inventory/Inventory'
 import Bills from './pages/bills/Bills'
 import Receipts from './pages/receipts/Receipts'
