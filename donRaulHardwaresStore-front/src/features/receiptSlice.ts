@@ -29,8 +29,8 @@ const initialState: IReceiptState = {
 }
 
 enum receiptURL {
-    getAllReceiptsURL = 'http://localhost:8080/v1/api/allReceipts',
-    postReceiptURL = 'http://localhost:8080/v1/api/postReceipt',
+    getAllReceiptsURL = 'https://don-raul-hs-felipe-sofkau.herokuapp.com/v1/api/allReceipts',
+    postReceiptURL = 'https://don-raul-hs-felipe-sofkau.herokuapp.com/v1/api/postReceipt',
 } 
 
 export const getAllReceipts = createAsyncThunk('getAllReceipts', async () => {

@@ -29,9 +29,9 @@ const initialState: IProvidersState = {
 }
 
 enum providerURL {
-    getAllProvidersURL = 'http://localhost:8080/v1/api/all-providers',
-    postProviderURL = 'http://localhost:8080/v1/api/postProvider',
-    putProviderURL = 'http://localhost:8080/v1/api/putProvider' 
+    getAllProvidersURL = 'https://don-raul-hs-felipe-sofkau.herokuapp.com/v1/api/all-providers',
+    postProviderURL = 'https://don-raul-hs-felipe-sofkau.herokuapp.com/v1/api/postProvider',
+    putProviderURL = 'https://don-raul-hs-felipe-sofkau.herokuapp.com/v1/api/putProvider' 
 } 
 
 export const getAllProviders = createAsyncThunk('getAllProviders', async () => {

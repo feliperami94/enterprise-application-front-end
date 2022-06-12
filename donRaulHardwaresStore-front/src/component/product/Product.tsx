@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { productType, putProduct, deleteProduct } from '../features/productslice';
+import { productType, putProduct, deleteProduct } from '../../features/productslice';
 import { useSelector } from 'react-redux';
-import { selectProviderState } from '../features/providerSlice'; 
-import { useAppDispatch } from '../app/store';
+import { selectProviderState } from '../../features/providerSlice'; 
+import { useAppDispatch } from '../../app/store';
 
 interface IProductProps {
     product: productType
@@ -25,7 +25,17 @@ const Product: React.FunctionComponent<IProductProps> = ({product}) => {
   const [editProvider, setEditProvider] = React.useState(product.providerId);
 
   const commitProductEdition = async(product: productType) => {
-    if(editName && editDescription && editQuantity && editPrice && editMin && editMax && editProvider){
+    if (editQuantity > editMax){
+      alert("the quantity must be minor or equal than the max quantity")
+      setEditState(false)
+      setEditName(product.productName);
+      setEditDescription(product.description);
+      setEditPrice(product.productPrice);
+      setEditQuantity(product.productQuantity);
+      setEditMin(product.minQuantity);
+      setEditMax(product.maxQuantity);
+      setEditProvider(product.providerId);
+    } else if(editName && editDescription && editQuantity && editPrice && editMin && editMax && editProvider){
       const editedProduct: productType = { productId: product.productId, 
       productName: editName,
       description: editDescription,
@@ -50,7 +60,7 @@ const Product: React.FunctionComponent<IProductProps> = ({product}) => {
   return (
     <>
       {editState === false?
-    <tr>
+    <tr className={product.productQuantity < product.minQuantity? 'bg-red-500':''}>
       <td className='p-3 '>{product.productName}</td>
       <td className='p-3 '>{product.description}</td>
       <td className='p-3 '>{product.productPrice}</td>
@@ -65,10 +75,10 @@ const Product: React.FunctionComponent<IProductProps> = ({product}) => {
     <tr>
     <td><input type="text" className='border-2 border-amber-500 rounded-md' value={editName} onChange={e=>setEditName(e.target.value)}/></td>
     <td><input type="text" className='border-2 border-amber-500 rounded-md'value={editDescription} onChange={e=>setEditDescription(e.target.value)}/></td>
-    <td><input type="number" className='border-2 border-amber-500 rounded-md' value={editPrice} onChange={e=>setEditPrice(Number(e.target.value))}/></td>
-    <td><input type="number" className='border-2 border-amber-500 rounded-md'value={editQuantity} onChange={e=>setEditQuantity(Number(e.target.value))}/></td>
-    <td><input type="number" className='border-2 border-amber-500 rounded-md'value={editMin} onChange={e=>setEditMin(Number(e.target.value))}/></td>
-    <td><input type="number" className='border-2 border-amber-500 rounded-md'value={editMax} onChange={e=>setEditMax(Number(e.target.value))}/></td>
+    <td><input type="number" className='border-2 border-amber-500 rounded-md' value={editPrice} onChange={e=>setEditPrice(Number(e.target.value))} min='1'/></td>
+    <td><input type="number" className='border-2 border-amber-500 rounded-md'value={editQuantity} onChange={e=>setEditQuantity(Number(e.target.value))} min='0'/></td>
+    <td><input type="number" className='border-2 border-amber-500 rounded-md'value={editMin} onChange={e=>setEditMin(Number(e.target.value))} min='0'/></td>
+    <td><input type="number" className='border-2 border-amber-500 rounded-md'value={editMax} onChange={e=>setEditMax(Number(e.target.value))} min='0'/></td>
     <td>
     <select name="" id="" className='border-2 border-amber-500 rounded-md' value={editProvider}  onChange={e=>setEditProvider(e.target.value)}>
                   {providerState.map((provider) => provider.availability?<option key={provider.providerId} value = {provider.providerId}>

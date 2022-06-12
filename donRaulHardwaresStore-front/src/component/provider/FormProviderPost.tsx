@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { postProvider, providerType } from '../features/providerSlice';
-import { useAppDispatch } from '../app/store'
+import { postProvider, providerType } from '../../features/providerSlice';
+import { useAppDispatch } from '../../app/store'
 
 
 interface IFormProviderPostProps {
@@ -36,7 +36,7 @@ const FormProviderPost: React.FunctionComponent<IFormProviderPostProps> = (props
     <div className='p-6 mx-auto'>
   <label className='text-lg'>
     Provider's Phone:
-    <input className='border-2 border-amber-500 rounded-md' type='number' value={providerPhone} onChange={(e) => setProviderPhone(e.target.value)} />
+    <input className='border-2 border-amber-500 rounded-md' type='number' min='0' value={providerPhone} onChange={(e) => setProviderPhone(e.target.value)} />
   </label>
 
     </div>

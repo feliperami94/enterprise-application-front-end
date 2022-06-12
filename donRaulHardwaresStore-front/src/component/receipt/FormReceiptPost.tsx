@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux'
-import { selectProviderState } from '../features/providerSlice'
-import { selectProductState } from '../features/productslice'
-import { useAppDispatch } from '../app/store'
-import { postReceipt, receiptType } from '../features/receiptSlice';
+import { selectProviderState } from '../../features/providerSlice'
+import { productType, putProduct, selectProductState } from '../../features/productslice'
+import { useAppDispatch } from '../../app/store'
+import { postReceipt, receiptType } from '../../features/receiptSlice';
 import * as moment from 'moment'
 
 interface IFormReceiptPostProps {
@@ -20,16 +20,27 @@ const FormReceiptPost: React.FunctionComponent<IFormReceiptPostProps> = (props) 
 
   const generateReceipt = (e: React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
-    if(productId && quantity){
-      const product = productState.filter(product => product.productId === productId)[0];
-      const actualDate = moment().format("DD-MM-YYYY");   
-      const newReceipt: receiptType = {productQuantity: quantity, receiptProductId: productId, receiptDate: actualDate  ,providerId: product.providerId }
-      dispatch(postReceipt(newReceipt))
+
+    const product = productState.filter(product => product.productId === productId)[0];
+    if(product.productQuantity + quantity > product.maxQuantity){
+      alert("the receipt can't be emmited because the product quantity would be greater than the maximum")
+    } else if(productId && quantity){
+        const actualDate = moment().format("DD-MM-YYYY");   
+        const newReceipt: receiptType = {productQuantity: quantity, receiptProductId: productId, receiptDate: actualDate  ,providerId: product.providerId }
+        dispatch(postReceipt(newReceipt))
+        const updatedProduct:productType = {
+          productId: product.productId,
+          productName: product.productName,
+          description: product.description, 
+          productPrice: product.productPrice, 
+          productQuantity: product.productQuantity+quantity, 
+          minQuantity: product.minQuantity,
+          maxQuantity: product.maxQuantity,
+          providerId: product.providerId}
+        dispatch(putProduct(updatedProduct))
     }
     setProductId('');
     setQuantity(0);
-
-
 
     
   }

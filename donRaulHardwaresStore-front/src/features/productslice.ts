@@ -40,10 +40,10 @@ const initialState: IProductState = {
 }
 
 enum productsURL {
-    getAllProductsURL = 'http://localhost:8080/v1/api/allProducts',
-    postProductsURL = 'http://localhost:8080/v1/api/postProduct',
-    putProductURL = 'http://localhost:8080/v1/api/putProduct',
-    deleteProductBaseURL = 'http://localhost:8080/v1/api/deleteProduct'
+    getAllProductsURL = 'https://don-raul-hs-felipe-sofkau.herokuapp.com/v1/api/allProducts',
+    postProductsURL = 'https://don-raul-hs-felipe-sofkau.herokuapp.com/v1/api/postProduct',
+    putProductURL = 'https://don-raul-hs-felipe-sofkau.herokuapp.com/v1/api/putProduct',
+    deleteProductBaseURL = 'https://don-raul-hs-felipe-sofkau.herokuapp.com/v1/api/deleteProduct'
 } 
 
 export const getAllProducts = createAsyncThunk('getAllProducts', async () => {

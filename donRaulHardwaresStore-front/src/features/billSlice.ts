@@ -30,8 +30,8 @@ const initialState: IBillState = {
 }
 
 enum billURL {
-    getAllBillsURL = 'http://localhost:8080/v1/api/allBills',
-    postBillURL = 'http://localhost:8080/v1/api/postBill',
+    getAllBillsURL = 'https://don-raul-hs-felipe-sofkau.herokuapp.com/v1/api/allBills',
+    postBillURL = 'https://don-raul-hs-felipe-sofkau.herokuapp.com/v1/api/postBill',
 } 
 
 export const getAllBills = createAsyncThunk('getAllBills', async () => {

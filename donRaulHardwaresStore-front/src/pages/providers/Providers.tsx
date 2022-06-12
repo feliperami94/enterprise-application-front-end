@@ -1,6 +1,6 @@
 import * as React from 'react';
-import FormProviderPost from '../../component/FormProviderPost';
-import ProviderList from '../../component/ProviderList';
+import FormProviderPost from '../../component/provider/FormProviderPost';
+import ProviderList from '../../component/provider/ProviderList';
 import { useAppDispatch} from '../../app/store';
 import { useSelector } from 'react-redux';
 import { selectReceiptStatus, receiptFetchStatus, getAllReceipts } from '../../features/receiptSlice';

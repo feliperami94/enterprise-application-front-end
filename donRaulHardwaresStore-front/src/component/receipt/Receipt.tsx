@@ -1,9 +1,9 @@
 import { ProviderId } from 'firebase/auth';
 import * as React from 'react';
-import { receiptType } from '../features/receiptSlice';
+import { receiptType } from '../../features/receiptSlice';
 import {useSelector} from 'react-redux';
-import {selectProviderState} from '../features/providerSlice';
-import { selectProductState } from '../features/productslice';
+import {selectProviderState} from '../../features/providerSlice';
+import { selectProductState } from '../../features/productslice';
 
 interface IReceiptProps {
   receipt: receiptType;

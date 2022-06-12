@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {useSelector } from 'react-redux';
-import {selectProductState, selectBillProducts} from '../features/productslice';
-import {useAppDispatch} from '../app/store';
+import {selectProductState, selectBillProducts} from '../../features/productslice';
+import {useAppDispatch} from '../../app/store';
 import ProductItemBill from './ProductItemBill';
 import {useState} from 'react'
-import { billType, postBill } from '../features/billSlice';
+import { billType, postBill } from '../../features/billSlice';
 import * as moment from 'moment'
 
 

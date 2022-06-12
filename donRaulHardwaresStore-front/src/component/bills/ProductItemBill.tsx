@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { productType } from '../features/productslice';
-import {useAppDispatch} from '../app/store';
-import { productToBill, selectBillProducts } from '../features/productslice'
+import { productType } from '../../features/productslice';
+import {useAppDispatch} from '../../app/store';
+import { productToBill, selectBillProducts } from '../../features/productslice'
 import { useSelector} from 'react-redux';
 
 

@@ -8,7 +8,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
   
   return(
-    <div className='flex justify-center mx-auto my-10'>
+    <div className='flex justify-center mx-auto h-1/2'>
       <GoogleLogin />
     </div>
   );

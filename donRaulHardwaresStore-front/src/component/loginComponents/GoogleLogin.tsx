@@ -57,8 +57,8 @@ const GoogleLogin: React.FunctionComponent<IGoogleLoginProps> = (props) => {
           // ...
         });
       }
-  return (<div>
-    <button onClick={signInWithGoogleButton} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Log in with google</button>
+  return (<div className="flex justify-center w-3/4 align-middle bg-amber-500">
+    <button onClick={signInWithGoogleButton} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-2xl'>Log in with google</button>
   </div>);
 };
 

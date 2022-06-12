@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useSelector, } from 'react-redux';
-import { useAppDispatch } from '../app/store';
-import { selectReceiptFetchError,  selectReceiptStatus, selectReceiptState, receiptFetchStatus, getAllReceipts} from '../features/receiptSlice';
+import { useAppDispatch } from '../../app/store';
+import { selectReceiptFetchError,  selectReceiptStatus, selectReceiptState, receiptFetchStatus, getAllReceipts} from '../../features/receiptSlice';
 import Receipt from './Receipt';
 
 interface IReceiptsListProps {

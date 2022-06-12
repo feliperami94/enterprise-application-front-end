@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { providerType, putProvider } from '../features/providerSlice'
-import { useAppDispatch } from '../app/store'
+import { providerType, putProvider } from '../../features/providerSlice'
+import { useAppDispatch } from '../../app/store'
 
 
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useAppDispatch } from '../app/store'
+import { useAppDispatch } from '../../app/store'
 import { useSelector } from 'react-redux'
-import {getAllProducts, selectProductFetchError, selectProductState, selectProductStatus, productFetchStatus} from '../features/productslice'
+import {getAllProducts, selectProductFetchError, selectProductState, selectProductStatus, productFetchStatus} from '../../features/productslice'
 import Product from "./Product"
 
 interface IProductListProps {

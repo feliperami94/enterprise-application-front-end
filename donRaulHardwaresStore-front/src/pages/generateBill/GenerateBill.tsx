@@ -1,5 +1,5 @@
 import * as React from 'react';
-import FormPostBills from '../../component/FormPostBill';
+import FormPostBills from '../../component/bills/FormPostBill';
 
 interface IGenerateBillProps {
 }

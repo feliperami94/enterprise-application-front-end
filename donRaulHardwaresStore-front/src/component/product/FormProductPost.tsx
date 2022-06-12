@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useAppDispatch } from '../app/store'
-import { postProduct, productType } from '../features/productslice';
+import { useAppDispatch } from '../../app/store'
+import { postProduct, productType } from '../../features/productslice';
 import { useSelector } from 'react-redux'
-import { selectProviderState } from '../features/providerSlice'
+import { selectProviderState } from '../../features/providerSlice'
 
 
 interface IFormProductPostProps {
@@ -24,7 +24,27 @@ const FormProductPost: React.FunctionComponent<IFormProductPostProps> = (props) 
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (productName && description && productQuantity && productPrice && minQuantity && maxQuantity && providerId) {
+        if(minQuantity >= maxQuantity){
+          alert("The min quantity must be minor than the max quantity")
+          setProductName('')
+          setDescription('')
+          setProductQuantity(0)
+          setProductPrice(0)
+          setMinQuantity(0)
+          setMaxQuantity(0)
+          setProviderId('')
+        } else if(productQuantity > maxQuantity){
+          alert("The product quantity must be minor or equal than the max quantity")
+          setProductName('')
+          setDescription('')
+          setProductQuantity(0)
+          setProductPrice(0)
+          setMinQuantity(0)
+          setMaxQuantity(0)
+          setProviderId('')
+        }     
+        
+        else if (productName && description && productQuantity && productPrice && minQuantity && maxQuantity && providerId) {
           const newProduct: productType = { productName, description, productQuantity, productPrice, minQuantity, maxQuantity, providerId}
           dispatch(postProduct(newProduct))
           setProductName('')
@@ -35,6 +55,8 @@ const FormProductPost: React.FunctionComponent<IFormProductPostProps> = (props) 
           setMaxQuantity(0)
           setProviderId('')
         }
+
+        
     }
 
   return (
@@ -56,10 +78,10 @@ const FormProductPost: React.FunctionComponent<IFormProductPostProps> = (props) 
             <tr>
                 <td><input type="text" className='my-6 border-2 border-amber-500 rounded-md' value={productName} onChange={e=>setProductName(e.target.value)}/></td>
                 <td><input type="text" className='my-6 border-2 border-amber-500 rounded-md' value={description} onChange={e=>setDescription(e.target.value)}/></td>
-                <td><input type="number" className='my-6 border-2 border-amber-500 rounded-md' value={productQuantity} onChange={e=>setProductQuantity(Number(e.target.value))}/></td>
-                <td><input type="number" className='my-6 border-2 border-amber-500 rounded-md' value={productPrice} onChange={e=>setProductPrice(Number(e.target.value))}/></td>
-                <td><input type="number" className='my-6 border-2 border-amber-500 rounded-md' value={minQuantity} onChange={e=>setMinQuantity(Number(e.target.value))}/></td>
-                <td><input type="number" className='my-6 border-2 border-amber-500 rounded-md' value={maxQuantity} onChange={e=>setMaxQuantity(Number(e.target.value))}/></td>
+                <td><input type="number" className='my-6 border-2 border-amber-500 rounded-md' value={productPrice} onChange={e=>setProductPrice(Number(e.target.value))} min='1'/></td>
+                <td><input type="number" className='my-6 border-2 border-amber-500 rounded-md' value={productQuantity} onChange={e=>setProductQuantity(Number(e.target.value))} min='0'/></td>
+                <td><input type="number" className='my-6 border-2 border-amber-500 rounded-md' value={minQuantity} onChange={e=>setMinQuantity(Number(e.target.value))} min='0'/></td>
+                <td><input type="number" className='my-6 border-2 border-amber-500 rounded-md' value={maxQuantity} onChange={e=>setMaxQuantity(Number(e.target.value))} min='0'/></td>
                 {/* <td><input type="string" className='border-2 border-amber-500 rounded-md' value={providerId} onChange={e=>setProviderId(e.target.value)}/></td> */}
                 <select name="" id="" className='my-6 border-2 border-amber-500 rounded-md'  onChange={e=>setProviderId(e.target.value)}>
                   {<option disabled selected>Choose Provider</option>}
